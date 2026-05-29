@@ -4,8 +4,10 @@ import { Button } from '@/components/ui/Button'
 import { useLang } from '@/context/LanguageContext'
 import { t } from '@/i18n/translations'
 
+function PDFIcon() { return <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 13h6m-3-3v6"/></svg> }
+
 export function CTASection() {
-  const { lang } = useLang()
+  const { lang, toggle } = useLang()
   const tx = t[lang].cta
 
   return (
@@ -36,6 +38,10 @@ export function CTASection() {
             <Button variant="primary" size="lg" href="https://github.com/aasayag-hash/camilladsp-auto-install-with-back-and-frontend/releases/latest" external>
               <DownloadIcon />
               {tx.download}
+            </Button>
+            <Button variant="secondary" size="lg" href="/FlexDSP-Audio-Manual.pdf" external>
+              <PDFIcon />
+              {lang === 'es' ? 'Descargar Manual PDF' : 'Download PDF Manual'}
             </Button>
             <Button variant="outline" size="lg" href="#how-it-works">
               <DocsIcon />
