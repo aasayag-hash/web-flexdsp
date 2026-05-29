@@ -4,8 +4,8 @@ import { FadeIn } from '@/components/animations/FadeIn'
 const features = [
   {
     icon: <VUIcon />,
-    title: 'VU Meters & Compressors',
-    desc: 'Real-time RMS level meters per channel with peak hold and GR reduction display. Per-channel gain faders (−40 to +10 dB), mute, phase inversion, delay in ms, and a full compressor/limiter table with attack, release, threshold, ratio, makeup and soft-clip.',
+    title: 'Unlimited Channels — VU Meters & Compressors',
+    desc: 'Monitors as many input and output channels as your audio interface provides — no fixed limit. Real-time RMS level meters with peak hold and GR reduction. Per-channel gain faders (−40 to +10 dB), mute, phase inversion, delay, and a full compressor/limiter table with attack, release, threshold, ratio, makeup and soft-clip.',
     color: 'blue',
     tag: 'VUmetros',
   },
@@ -18,8 +18,8 @@ const features = [
   },
   {
     icon: <ParamIcon />,
-    title: 'Parametric EQ ±15 dB',
-    desc: 'Interactive parametric EQ per channel (inputs and outputs). Drag nodes to adjust frequency and gain, double-tap to add filters, long-press to delete. Types: Peaking, Highshelf, Lowshelf, Highpass, Lowpass. Imports REW, Equalizer APO, MiniDSP biquad, AudioSight and YAML. Exports to JSON.',
+    title: 'Unlimited Parametric EQ Filters',
+    desc: 'Add as many parametric EQ filters as needed per channel — no cap. Interactive graph per input and output channel: drag nodes to adjust, double-tap to add, long-press to delete. Types: Peaking, Highshelf, Lowshelf, Highpass, Lowpass. Imports REW, Equalizer APO, MiniDSP biquad, AudioSight and YAML. Exports to JSON.',
     color: 'green',
     tag: 'Parametric EQ',
   },

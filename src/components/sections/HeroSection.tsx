@@ -62,9 +62,9 @@ export function HeroSection() {
               variants={stagger.item}
               className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-10"
             >
-              FlexDSP Audio is a complete DSP system for Linux embedded devices — with real-time
-              VU metering, parametric EQ, active crossovers, FIR filters, Dante/AES67 support,
-              and a browser-based control console accessible from any device on your network.
+              FlexDSP Audio is a complete DSP system for Linux embedded devices — unlimited input/output
+              channels, unlimited parametric EQ filters per channel, active crossovers, FIR convolution,
+              Dante/AES67, and a browser-based console accessible from any device on your network.
             </motion.p>
 
             {/* CTAs */}
@@ -90,7 +90,7 @@ export function HeroSection() {
               {[
                 { value: 'v2.51', label: 'Latest Version' },
                 { value: '64-bit', label: 'Precision' },
-                { value: '31', label: 'EQ Bands' },
+                { value: '∞', label: 'Channels & EQ filters' },
                 { value: 'Dante', label: 'AES67 Support' },
               ].map((s) => (
                 <div key={s.label} className="flex flex-col items-center gap-1">
