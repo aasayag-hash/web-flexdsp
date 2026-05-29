@@ -4,85 +4,85 @@ import { FadeIn } from '@/components/animations/FadeIn'
 const features = [
   {
     icon: <VUIcon />,
-    title: 'Real-time VU Meters',
-    desc: 'Live RMS level meters per channel with gain faders, mute, polarity inversion, per-channel delay, and limiter/compressor controls.',
+    title: 'VU Meters & Compressors',
+    desc: 'Real-time RMS level meters per channel with peak hold and GR reduction display. Per-channel gain faders (−40 to +10 dB), mute, phase inversion, delay in ms, and a full compressor/limiter table with attack, release, threshold, ratio, makeup and soft-clip.',
     color: 'blue',
-    tag: 'VU Tab',
+    tag: 'VUmetros',
   },
   {
-    icon: <EQIcon />,
+    icon: <GEQIcon />,
     title: '31-band Graphic EQ',
-    desc: 'Linear-phase graphic equalizer with 31 bands (±9 dB) applied to input channels. Phase-accurate processing with no pre-ringing artifacts.',
+    desc: 'Linear-phase graphic equalizer with 31 bands from 20 Hz to 20 kHz in 1/3-octave spacing, ±9 dB per band. Uses FIR filters internally — no phase distortion. Applies to input channels. Includes subsonic filter <15 Hz.',
     color: 'cyan',
     tag: 'Graphic EQ',
   },
   {
-    icon: <ParamEQIcon />,
-    title: 'Interactive Parametric EQ',
-    desc: 'Full-featured parametric EQ (±15 dB) with drag-and-drop filter nodes. Import from REW, Equalizer APO, YAML or CSV. Export to YAML.',
+    icon: <ParamIcon />,
+    title: 'Parametric EQ ±15 dB',
+    desc: 'Interactive parametric EQ per channel (inputs and outputs). Drag nodes to adjust frequency and gain, double-tap to add filters, long-press to delete. Types: Peaking, Highshelf, Lowshelf, Highpass, Lowpass. Imports REW, Equalizer APO, MiniDSP biquad, AudioSight and YAML. Exports to JSON.',
     color: 'green',
     tag: 'Parametric EQ',
   },
   {
     icon: <CrossoverIcon />,
     title: 'Active Crossovers',
-    desc: 'Butterworth and Linkwitz-Riley crossover filters up to 48 dB/oct per channel, with real-time frequency response graph.',
+    desc: 'Frequency division filters for multi-amplified speaker systems. Butterworth and Linkwitz-Riley Lowpass/Highpass up to 4th order (24 dB/oct). Assigned per output channel with real-time frequency response graph and draggable cutoff frequency.',
     color: 'blue',
     tag: 'Crossovers',
   },
   {
     icon: <FIRIcon />,
     title: 'FIR Filter Loading',
-    desc: 'Load FIR convolution filters up to 200,000 taps from .wav, .f64, or .f32 files. Browser-side FFT magnitude and phase graph.',
+    desc: 'Upload convolution FIR filters (.wav or binary .f64/.f32) per output channel. Real-time magnitude and phase response graph calculated by FFT in the browser. Supports files up to 200,000 taps. Assign multiple files and visualize them overlaid.',
     color: 'cyan',
-    tag: 'FIR Filters',
+    tag: 'Filtros FIR',
   },
   {
     icon: <MixerIcon />,
-    title: 'Matrix Mixer & Routing',
-    desc: 'Full I/O routing matrix with presets, ALSA device selector, and integrated Dante/AES67 channel configuration.',
+    title: 'Matrix Mixer & Presets',
+    desc: 'Full input-to-output routing matrix with per-cell gain control. Save, load and delete complete pipeline configurations as named presets — including Dante RX/TX channel assignments. Audio device selection directly from the browser.',
     color: 'green',
     tag: 'Mixer',
   },
   {
-    icon: <DanteIcon />,
-    title: 'Dante / AES67 Support',
-    desc: 'Native Dante audio over IP via inferno ALSA plugin. Configure RX/TX channels (2–12) from the web console. PTP sync via statime.',
+    icon: <MeasureIcon />,
+    title: 'Room Calibration & Measurement',
+    desc: 'Integrated loopback calibration tool: select capture/playback device, run a calibration sweep, and view the measured response curve vs corrected vs noise floor. Generate corrective FIR filters directly from the measurement. Stored per-calibration for comparison.',
     color: 'blue',
+    tag: 'Mediciones',
+  },
+  {
+    icon: <DanteIcon />,
+    title: 'Dante / AES67 Network Audio',
+    desc: 'Native Dante audio over IP via the inferno ALSA plugin. Configure device name, network interface, and RX/TX channel count (2–12) from the web console. PTP clock sync via statime daemon. Dante channel assignments are saved inside presets.',
+    color: 'cyan',
     tag: 'Dante',
   },
   {
-    icon: <UndoIcon />,
-    title: 'Auto Backup & Undo',
-    desc: 'Every config change is automatically backed up to config-bk.yml. One-click undo restores the previous configuration instantly.',
-    color: 'cyan',
-    tag: 'Safety',
-  },
-  {
-    icon: <PresetIcon />,
-    title: 'Preset Management',
-    desc: 'Save, load, and delete complete DSP pipeline presets — including Dante channel assignments. Presets stored as versioned YAML files.',
-    color: 'green',
-    tag: 'Presets',
-  },
-  {
     icon: <EngineIcon />,
-    title: 'Engine Options',
-    desc: 'Fine-tune buffer sizes (64 → 4096 samples), resampling quality, silence detection threshold, and multi-threading parameters.',
+    title: 'Advanced Engine Options',
+    desc: 'Fine-tune buffer size (chunksize), queue limit, silence detection threshold and timeout, volume ramp time, rate adjustment, multi-threading (worker threads), and resampler type — all from the browser without editing config files.',
+    color: 'green',
+    tag: 'Opciones',
+  },
+  {
+    icon: <UndoIcon />,
+    title: 'Auto Backup & One-click Undo',
+    desc: 'Every configuration change is automatically backed up before being applied. The UNDO button in the top bar instantly restores the previous state — no need to reload or reconfigure.',
     color: 'blue',
-    tag: 'Options',
+    tag: 'Safety',
   },
   {
     icon: <WebIcon />,
     title: 'Browser-based Console',
-    desc: 'Access the full DSP control interface from any browser on your local network at port 5000 — no app installation required.',
+    desc: 'Full DSP control from any browser on your local network — desktop, tablet or phone. No app to install. Optimized for touchscreens: tap, drag, double-tap and long-press gestures. Supports ES/EN language toggle and fullscreen mode.',
     color: 'cyan',
     tag: 'Web UI',
   },
   {
     icon: <MultiArchIcon />,
-    title: 'Multi-architecture',
-    desc: 'Pre-built engine binaries for aarch64 (RPi4/5, TV-Box), armv7 (RPi3), and x86_64. One-command installer for all platforms.',
+    title: 'Multi-architecture Installer',
+    desc: 'One-command installer for Linux x86_64, aarch64 (TV-Box, RPi 4/5) and armv7 (RPi 3). Installs CamillaDSP engine, Flask web backend, systemd services and auto-start. Optional Dante/AES67 support with a single flag.',
     color: 'green',
     tag: 'Cross-platform',
   },
@@ -90,21 +90,15 @@ const features = [
 
 const colorMap = {
   blue: {
-    bg: 'bg-blue-500/10',
-    border: 'border-blue-500/20',
-    text: 'text-blue-400',
+    bg: 'bg-blue-500/10', border: 'border-blue-500/20', text: 'text-blue-400',
     tag: 'bg-blue-500/10 text-blue-500 border-blue-500/20',
   },
   cyan: {
-    bg: 'bg-cyan-500/10',
-    border: 'border-cyan-500/20',
-    text: 'text-cyan-400',
+    bg: 'bg-cyan-500/10', border: 'border-cyan-500/20', text: 'text-cyan-400',
     tag: 'bg-cyan-500/10 text-cyan-500 border-cyan-500/20',
   },
   green: {
-    bg: 'bg-emerald-500/10',
-    border: 'border-emerald-500/20',
-    text: 'text-emerald-400',
+    bg: 'bg-emerald-500/10', border: 'border-emerald-500/20', text: 'text-emerald-400',
     tag: 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20',
   },
 }
@@ -127,8 +121,7 @@ export function FeaturesSection() {
             </span>
           </h2>
           <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            A complete real-time DSP system — from VU metering to FIR convolution — controlled through a
-            professional browser-based console.
+            A complete real-time DSP system — from VU metering and room calibration to FIR convolution and Dante networking — controlled through a professional browser-based console.
           </p>
         </FadeIn>
 
@@ -139,10 +132,10 @@ export function FeaturesSection() {
               <FadeIn key={f.title} delay={i * 0.04}>
                 <div className="group relative rounded-xl border border-white/[0.06] bg-white/[0.02] p-6 transition-all duration-300 hover:border-white/[0.10] hover:bg-white/[0.04] cursor-default h-full">
                   <div className="flex items-start justify-between mb-4">
-                    <div className={`w-10 h-10 rounded-lg ${c.bg} border ${c.border} flex items-center justify-center ${c.text} transition-transform duration-300 group-hover:scale-110`}>
+                    <div className={`w-10 h-10 rounded-lg ${c.bg} border ${c.border} flex items-center justify-center ${c.text} transition-transform duration-300 group-hover:scale-110 shrink-0`}>
                       {f.icon}
                     </div>
-                    <span className={`text-xs font-mono px-2 py-0.5 rounded border ${c.tag}`}>{f.tag}</span>
+                    <span className={`text-xs font-mono px-2 py-0.5 rounded border ${c.tag} ml-2 shrink-0`}>{f.tag}</span>
                   </div>
                   <h3 className="font-semibold text-white mb-2 text-sm">{f.title}</h3>
                   <p className="text-sm text-slate-500 leading-relaxed">{f.desc}</p>
@@ -159,10 +152,10 @@ export function FeaturesSection() {
 function VUIcon() {
   return <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="8" width="2" height="12" rx="1" strokeWidth={1.5}/><rect x="7" y="5" width="2" height="15" rx="1" strokeWidth={1.5}/><rect x="11" y="3" width="2" height="17" rx="1" strokeWidth={1.5}/><rect x="15" y="6" width="2" height="14" rx="1" strokeWidth={1.5}/><rect x="19" y="9" width="2" height="11" rx="1" strokeWidth={1.5}/></svg>
 }
-function EQIcon() {
+function GEQIcon() {
   return <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12h2m0 0V8m0 4v4M9 12h2m0 0V6m0 6v6M15 12h2m0 0V9m0 3v5M21 12h-2"/></svg>
 }
-function ParamEQIcon() {
+function ParamIcon() {
   return <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12C3 12 6 5 9 5s4 7 6 7 3-6 6-6"/><circle cx="9" cy="7" r="1.5" fill="currentColor" stroke="none"/><circle cx="15" cy="15" r="1.5" fill="currentColor" stroke="none"/></svg>
 }
 function CrossoverIcon() {
@@ -174,17 +167,17 @@ function FIRIcon() {
 function MixerIcon() {
   return <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
 }
+function MeasureIcon() {
+  return <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+}
 function DanteIcon() {
   return <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.14 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"/></svg>
 }
-function UndoIcon() {
-  return <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/></svg>
-}
-function PresetIcon() {
-  return <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/></svg>
-}
 function EngineIcon() {
   return <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+}
+function UndoIcon() {
+  return <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/></svg>
 }
 function WebIcon() {
   return <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" strokeWidth={1.5}/><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.6 9h16.8M3.6 15h16.8M12 3a17 17 0 000 18M12 3a17 17 0 010 18"/></svg>
