@@ -2,12 +2,17 @@
 import { motion } from 'framer-motion'
 import { cn } from '@/utils/cn'
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'ghost' | 'outline'
   size?: 'sm' | 'md' | 'lg'
   href?: string
   external?: boolean
   children: React.ReactNode
+  className?: string
+  onClick?: React.MouseEventHandler<HTMLButtonElement>
+  disabled?: boolean
+  type?: 'button' | 'submit' | 'reset'
+  'aria-label'?: string
 }
 
 export function Button({
@@ -17,7 +22,10 @@ export function Button({
   external,
   children,
   className,
-  ...props
+  onClick,
+  disabled,
+  type = 'button',
+  'aria-label': ariaLabel,
 }: ButtonProps) {
   const base = 'inline-flex items-center gap-2 font-medium rounded-lg transition-all duration-200 cursor-pointer'
 
@@ -49,6 +57,7 @@ export function Button({
         target={external ? '_blank' : undefined}
         rel={external ? 'noopener noreferrer' : undefined}
         className={cls}
+        aria-label={ariaLabel}
         {...motionProps}
       >
         {children}
@@ -57,7 +66,14 @@ export function Button({
   }
 
   return (
-    <motion.button className={cls} {...motionProps} {...(props as object)}>
+    <motion.button
+      className={cls}
+      onClick={onClick}
+      disabled={disabled}
+      type={type}
+      aria-label={ariaLabel}
+      {...motionProps}
+    >
       {children}
     </motion.button>
   )

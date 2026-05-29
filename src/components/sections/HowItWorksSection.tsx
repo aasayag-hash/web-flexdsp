@@ -118,7 +118,7 @@ export function HowItWorksSection() {
               <span className="text-xs text-slate-600 ml-2 font-mono">config.yml — FlexDSP pipeline example</span>
             </div>
             <pre className="p-6 text-sm font-mono text-slate-400 overflow-x-auto leading-relaxed">
-              <code>{`filters:
+{`filters:
   lowpass:
     type: BiquadCombo
     freq: 200
@@ -134,12 +134,12 @@ export function HowItWorksSection() {
 pipeline:
   - type: Filter
     channel: 0
-    names: [lowpass]       <span className="text-cyan-400"># Subwoofer channel</span>
+    names: [lowpass]       `}<span className="text-cyan-400">{`# Subwoofer channel`}</span>{`
   - type: Filter
     channel: 1
-    names: [highpass]      <span className="text-cyan-400"># Main speakers</span>
+    names: [highpass]      `}<span className="text-cyan-400">{`# Main speakers`}</span>{`
   - type: Mixer
-    name: matrix_out       <span className="text-blue-400"># Route to outputs</span>`}</code>
+    name: matrix_out       `}<span className="text-blue-400">{`# Route to outputs`}</span>
             </pre>
           </div>
         </FadeIn>
