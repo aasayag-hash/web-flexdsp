@@ -3,24 +3,27 @@ import { FadeIn } from '@/components/animations/FadeIn'
 
 const platforms = [
   {
-    name: 'Linux',
+    name: 'Linux x86_64',
     logo: <LinuxLogo />,
-    backends: ['ALSA', 'PipeWire', 'Jack'],
-    desc: 'Full native support. Optimal for server and embedded deployments.',
+    backends: ['ALSA', 'PipeWire'],
+    desc: 'Full native support on any 64-bit Linux PC or server. Ideal for studio and home audio setups.',
+    arch: 'amd64',
     status: 'stable',
   },
   {
-    name: 'macOS',
-    logo: <MacLogo />,
-    backends: ['CoreAudio', 'BlackHole'],
-    desc: 'Native CoreAudio integration. Apple Silicon optimized.',
+    name: 'Linux ARM64',
+    logo: <LinuxLogo />,
+    backends: ['ALSA', 'PipeWire'],
+    desc: 'Optimized for aarch64 SBCs — TV-Box (Armbian), Orange Pi, Rock Pi, and other ARM64 boards.',
+    arch: 'aarch64',
     status: 'stable',
   },
   {
-    name: 'Raspberry Pi',
+    name: 'Raspberry Pi 3 · 4 · 5',
     logo: <PiLogo />,
     backends: ['ALSA', 'PipeWire'],
-    desc: 'ARM-optimized builds for Pi 3/4/5. Perfect for embedded DSP appliances.',
+    desc: 'Purpose-built binaries for armv7 (Pi 3) and arm64 (Pi 4/5). Perfect for always-on DSP appliances.',
+    arch: 'armv7 / arm64',
     status: 'stable',
   },
 ]
@@ -28,10 +31,8 @@ const platforms = [
 const backends = [
   { name: 'ALSA', desc: 'Advanced Linux Sound Architecture', color: 'blue' },
   { name: 'PipeWire', desc: 'Modern Linux audio server', color: 'cyan' },
-  { name: 'CoreAudio', desc: 'macOS native audio API', color: 'green' },
-  { name: 'WASAPI', desc: 'Windows audio session API', color: 'blue' },
-  { name: 'AES67', desc: 'AES67 / Ravenna IP audio', color: 'cyan' },
-  { name: 'DANTE', desc: 'Audinate DANTE audio network', color: 'green' },
+  { name: 'AES67', desc: 'AES67 / Ravenna IP audio', color: 'green' },
+  { name: 'DANTE', desc: 'Audinate DANTE audio network', color: 'blue' },
 ]
 
 const useCases = [
@@ -112,13 +113,14 @@ export function PlatformSection() {
                   </div>
                   <h3 className="font-display font-bold text-white text-xl mb-2">{p.name}</h3>
                   <p className="text-sm text-slate-500 mb-4">{p.desc}</p>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mb-2">
                     {p.backends.map(b => (
                       <span key={b} className="text-xs font-mono text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2 py-1 rounded">
                         {b}
                       </span>
                     ))}
                   </div>
+                  <span className="text-xs font-mono text-slate-600">{p.arch}</span>
                 </div>
               </FadeIn>
             ))}
@@ -183,14 +185,6 @@ function LinuxLogo() {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
       <path d="M12.504 0c-.155 0-.315.008-.48.021-4.226.333-3.105 4.807-3.17 6.298-.076 1.092-.3 1.953-1.05 3.02-.885 1.051-2.127 2.75-2.716 4.521-.278.832-.41 1.684-.287 2.489.277 1.801 1.288 2.914 2.565 3.494 1.158.531 2.453.73 3.71.588 1.363-.154 2.698-.661 3.788-1.403 2.001-1.378 3.29-3.684 3.168-6.173-.11-2.31-.943-4.4-2.41-6.042C14.95 5.527 14.36 4.78 13.94 4.01c-.27-.498-.452-1.011-.466-1.553-.023-.796.396-1.497.932-1.898C14.57.2 14.83 0 14.83 0H12.504zm2.067 2.057c.253-.004.508.072.74.23.36.242.592.617.578 1.035-.015.44-.238.866-.567 1.155-.328.29-.759.417-1.184.385-.425-.033-.834-.219-1.127-.519-.292-.3-.457-.705-.435-1.115.023-.41.226-.8.543-1.063.254-.21.566-.32.875-.327l.577.22zm-5.14.215c.31.004.613.122.861.333.317.263.516.655.536 1.065.02.41-.147.815-.437 1.114-.289.3-.697.484-1.12.516-.422.03-.852-.099-1.178-.39-.327-.29-.545-.714-.558-1.155-.013-.419.22-.795.583-1.036.23-.155.485-.226.739-.226l.574-.221zm2.568 1.72c.43 0 .77.325.77.724 0 .4-.34.724-.77.724-.43 0-.77-.324-.77-.724 0-.4.34-.724.77-.724zm-4.43 4.003c.165-.003.336.035.491.108.487.233.753.794.628 1.31-.174.719-.872 1.19-1.608 1.097-.736-.094-1.278-.712-1.247-1.457.031-.745.613-1.358 1.38-1.457.12-.013.24-.018.356-.001zm8.765.001c.116-.017.236-.012.357.001.766.099 1.348.712 1.38 1.457.03.745-.512 1.363-1.248 1.457-.736.093-1.434-.378-1.607-1.097-.125-.516.14-1.077.628-1.31.155-.073.326-.111.49-.108zm-8.06 4.43c.235 0 .49.062.693.233.29.245.41.634.31.986-.223.8-.87 1.366-1.667 1.458-.795.092-1.565-.324-1.936-1.039-.253-.491-.22-1.09.083-1.551.302-.463.813-.712 1.343-.696.39.011.784.208 1.067.498.086.09.106.111.107.111zm7.355 0c.003 0 .021-.021.107-.111.283-.29.677-.487 1.067-.498.53-.016 1.042.233 1.343.696.303.46.336 1.06.083 1.55-.37.716-1.14 1.132-1.936 1.04-.797-.092-1.444-.659-1.667-1.458-.1-.352.02-.741.31-.986.203-.17.458-.233.693-.233zm-3.678 1.928c1.032 0 1.87.668 1.87 1.492v1.116c0 .824-.838 1.492-1.87 1.492-1.032 0-1.87-.668-1.87-1.492v-1.116c0-.824.838-1.492 1.87-1.492z"/>
-    </svg>
-  )
-}
-
-function MacLogo() {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-      <path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.029 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701z"/>
     </svg>
   )
 }
