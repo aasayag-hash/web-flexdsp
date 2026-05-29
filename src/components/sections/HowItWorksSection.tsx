@@ -106,43 +106,6 @@ export function HowItWorksSection() {
           </div>
         </div>
 
-        {/* YAML preview */}
-        <FadeIn className="mt-20">
-          <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] overflow-hidden">
-            <div className="flex items-center gap-2 px-6 py-4 border-b border-white/[0.06]">
-              <div className="flex gap-1.5">
-                <span className="w-3 h-3 rounded-full bg-red-500/60" />
-                <span className="w-3 h-3 rounded-full bg-yellow-500/60" />
-                <span className="w-3 h-3 rounded-full bg-green-500/60" />
-              </div>
-              <span className="text-xs text-slate-600 ml-2 font-mono">config.yml — FlexDSP pipeline example</span>
-            </div>
-            <pre className="p-6 text-sm font-mono text-slate-400 overflow-x-auto leading-relaxed">
-{`filters:
-  lowpass:
-    type: BiquadCombo
-    freq: 200
-    order: 4
-    pass_type: Lowpass
-
-  highpass:
-    type: BiquadCombo
-    freq: 200
-    order: 4
-    pass_type: Highpass
-
-pipeline:
-  - type: Filter
-    channel: 0
-    names: [lowpass]       `}<span className="text-cyan-400">{`# Subwoofer channel`}</span>{`
-  - type: Filter
-    channel: 1
-    names: [highpass]      `}<span className="text-cyan-400">{`# Main speakers`}</span>{`
-  - type: Mixer
-    name: matrix_out       `}<span className="text-blue-400">{`# Route to outputs`}</span>
-            </pre>
-          </div>
-        </FadeIn>
       </div>
     </section>
   )

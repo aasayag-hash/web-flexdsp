@@ -1,7 +1,6 @@
 'use client'
 import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { AudioWave } from '@/components/animations/AudioWave'
 import { ParticleField } from '@/components/animations/ParticleField'
 import { Button } from '@/components/ui/Button'
 
@@ -103,46 +102,6 @@ export function HeroSection() {
           </motion.div>
         </div>
 
-        {/* Waveform visualizer */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.6, ease: 'easeOut' as const }}
-          className="relative max-w-4xl mx-auto"
-        >
-          <div className="relative rounded-2xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm p-6 overflow-hidden">
-            {/* Header bar */}
-            <div className="flex items-center gap-2 mb-4">
-              <div className="flex gap-1.5">
-                <span className="w-3 h-3 rounded-full bg-red-500/60" />
-                <span className="w-3 h-3 rounded-full bg-yellow-500/60" />
-                <span className="w-3 h-3 rounded-full bg-green-500/60" />
-              </div>
-              <span className="text-xs text-slate-600 ml-2 font-mono">flexdsp · real-time processor · 44100Hz · 64-bit float</span>
-              <div className="ml-auto flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                <span className="text-xs text-green-400 font-mono">ACTIVE</span>
-              </div>
-            </div>
-
-            {/* Waveform */}
-            <div className="h-24 w-full">
-              <AudioWave bars={80} />
-            </div>
-
-            {/* Bottom labels */}
-            <div className="flex justify-between mt-3 text-xs font-mono text-slate-600">
-              <span>20Hz</span>
-              <span>100Hz</span>
-              <span>1kHz</span>
-              <span>10kHz</span>
-              <span>20kHz</span>
-            </div>
-
-            {/* Glow overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#080a0f]/50 pointer-events-none rounded-2xl" />
-          </div>
-        </motion.div>
       </div>
 
       {/* Scroll indicator */}
