@@ -16,7 +16,7 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: 'FlexDSP — Precision DSP Processing Without Limits',
-  description: 'Professional real-time audio DSP engine with FIR/IIR filtering, active crossovers, room correction, and ultra-low latency. Built for Linux, macOS, and Raspberry Pi.',
+  description: 'Professional real-time audio DSP engine with FIR/IIR filtering, active crossovers, room correction, and ultra-low latency. Built for Linux x86_64, ARM64, and Raspberry Pi.',
   keywords: ['DSP', 'audio processing', 'FIR filter', 'IIR filter', 'room correction', 'active crossover', 'CamillaDSP', 'real-time audio'],
   authors: [{ name: 'FlexDSP' }],
   openGraph: {

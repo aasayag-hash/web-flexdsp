@@ -32,7 +32,7 @@ export function CTASection() {
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4 mb-16">
-            <Button variant="primary" size="lg" href="#download">
+            <Button variant="primary" size="lg" href="https://github.com/aasayag-hash/camilladsp-auto-install-with-back-and-frontend/releases/latest" external>
               <DownloadIcon />
               Download Latest Release
             </Button>
