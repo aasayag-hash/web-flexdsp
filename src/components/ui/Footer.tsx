@@ -1,12 +1,20 @@
+'use client'
 import { FadeIn } from '@/components/animations/FadeIn'
+import { useLang } from '@/context/LanguageContext'
+import { t } from '@/i18n/translations'
+
+const resourceHrefs = ['#how-it-works', '#download', '#features', '#use-cases']
+const communityHrefs = ['https://www.audiosciencereview.com', 'https://www.diyaudio.com', 'https://audiophilestyle.com']
 
 export function Footer() {
+  const { lang } = useLang()
+  const tx = t[lang].footer
+
   return (
     <footer className="border-t border-white/[0.06] py-16">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <FadeIn>
           <div className="grid md:grid-cols-4 gap-10 mb-12">
-            {/* Brand */}
             <div className="md:col-span-2">
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center">
@@ -18,53 +26,35 @@ export function Footer() {
                 </div>
                 <span className="font-display font-bold text-white">FLEX<span className="text-blue-400">DSP</span></span>
               </div>
-              <p className="text-sm text-slate-500 leading-relaxed max-w-xs">
-                Professional-grade DSP engine for real-time audio processing, filtering, and room correction.
-              </p>
+              <p className="text-sm text-slate-500 leading-relaxed max-w-xs">{tx.desc}</p>
             </div>
 
-            {/* Links */}
             <div>
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-4">Resources</h4>
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-4">{tx.resourcesTitle}</h4>
               <ul className="space-y-2">
-                {[
-                  { label: 'Documentation', href: '#how-it-works' },
-                  { label: 'Download', href: '#download' },
-                  { label: 'Features', href: '#features' },
-                  { label: 'Use Cases', href: '#use-cases' },
-                ].map((l) => (
-                  <li key={l.label}>
-                    <a href={l.href} className="text-sm text-slate-500 hover:text-slate-300 transition-colors">
-                      {l.label}
-                    </a>
+                {tx.resources.map((label, i) => (
+                  <li key={label}>
+                    <a href={resourceHrefs[i]} className="text-sm text-slate-500 hover:text-slate-300 transition-colors">{label}</a>
                   </li>
                 ))}
               </ul>
             </div>
 
             <div>
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-4">Community</h4>
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-4">{tx.communityTitle}</h4>
               <ul className="space-y-2">
-                {[
-                  { label: 'Audio Science Review', href: 'https://www.audiosciencereview.com' },
-                  { label: 'DIY Audio', href: 'https://www.diyaudio.com' },
-                  { label: 'Audiophile Style', href: 'https://audiophilestyle.com' },
-                ].map((l) => (
-                  <li key={l.label}>
-                    <a href={l.href} target="_blank" rel="noopener noreferrer"
-                      className="text-sm text-slate-500 hover:text-slate-300 transition-colors">
-                      {l.label}
-                    </a>
+                {tx.community.map((label, i) => (
+                  <li key={label}>
+                    <a href={communityHrefs[i]} target="_blank" rel="noopener noreferrer"
+                      className="text-sm text-slate-500 hover:text-slate-300 transition-colors">{label}</a>
                   </li>
                 ))}
               </ul>
             </div>
           </div>
 
-          <div className="pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-slate-600">
-              © 2025 FlexDSP Audio · Built on CamillaDSP
-            </p>
+          <div className="pt-8 border-t border-white/[0.06]">
+            <p className="text-xs text-slate-600">{tx.copy}</p>
           </div>
         </FadeIn>
       </div>

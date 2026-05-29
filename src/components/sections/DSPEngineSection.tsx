@@ -2,21 +2,24 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { FadeIn } from '@/components/animations/FadeIn'
+import { useLang } from '@/context/LanguageContext'
+import { t } from '@/i18n/translations'
 
-const tabs = [
-  { key: 'vumetros',      label: 'VU Meters',       img: '/screenshots/tab_vumetros.png' },
-  { key: 'graphic_eq',    label: 'Graphic EQ',      img: '/screenshots/tab_graphic_eq.png' },
-  { key: 'parametric_eq', label: 'Parametric EQ',   img: '/screenshots/tab_parametric_eq.png' },
-  { key: 'crossovers',    label: 'Crossovers',      img: '/screenshots/tab_crossovers.png' },
-  { key: 'filtros_fir',   label: 'FIR Filters',     img: '/screenshots/tab_filtros_fir.png' },
-  { key: 'mixer',         label: 'Mixer',           img: '/screenshots/tab_mixer.png' },
-  { key: 'mediciones',    label: 'Measurements',    img: '/screenshots/tab_mediciones.png' },
-  { key: 'opciones',      label: 'Options',         img: '/screenshots/tab_opciones.png' },
+const imgs = [
+  '/screenshots/tab_vumetros.png',
+  '/screenshots/tab_graphic_eq.png',
+  '/screenshots/tab_parametric_eq.png',
+  '/screenshots/tab_crossovers.png',
+  '/screenshots/tab_filtros_fir.png',
+  '/screenshots/tab_mixer.png',
+  '/screenshots/tab_mediciones.png',
+  '/screenshots/tab_opciones.png',
 ]
 
 export function DSPEngineSection() {
-  const [active, setActive] = useState('vumetros')
-  const current = tabs.find(t => t.key === active)!
+  const [active, setActive] = useState(0)
+  const { lang } = useLang()
+  const tx = t[lang].dspEngine
 
   return (
     <section id="dsp-engine" className="py-32 relative overflow-hidden">
@@ -25,23 +28,20 @@ export function DSPEngineSection() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <FadeIn className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-slate-400 text-xs font-medium tracking-wider uppercase mb-6">
-            Web Console
+            {tx.badge}
           </div>
           <h2 className="font-display font-bold text-4xl md:text-5xl text-white tracking-tight mb-4">
-            Professional control
+            {tx.title1}
             <br />
             <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              from any browser
+              {tx.title2}
             </span>
           </h2>
-          <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            The FlexDSP web console gives you full real-time control from any device on your network — no app required.
-          </p>
+          <p className="text-lg text-slate-400 max-w-2xl mx-auto">{tx.desc}</p>
         </FadeIn>
 
         <FadeIn>
           <div className="rounded-2xl border border-white/[0.06] bg-[#0c0f1a]/80 overflow-hidden">
-            {/* App header */}
             <div className="flex items-center justify-between px-6 py-3 border-b border-white/[0.06]">
               <div className="flex items-center gap-4">
                 <div className="flex gap-1.5">
@@ -53,37 +53,30 @@ export function DSPEngineSection() {
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                <span className="text-xs text-green-400 font-mono">RUNNING</span>
+                <span className="text-xs text-green-400 font-mono">{tx.running}</span>
               </div>
             </div>
 
-            {/* Tab selector */}
             <div className="flex border-b border-white/[0.06] overflow-x-auto">
-              {tabs.map((tab) => (
-                <button
-                  key={tab.key}
-                  onClick={() => setActive(tab.key)}
+              {tx.tabs.map((label, i) => (
+                <button key={i} onClick={() => setActive(i)}
                   className={`px-5 py-3 text-xs font-medium uppercase tracking-wider whitespace-nowrap transition-all duration-200 ${
-                    active === tab.key
-                      ? 'text-blue-400 border-b-2 border-blue-500 bg-blue-500/5'
-                      : 'text-slate-500 hover:text-slate-300'
-                  }`}
-                >
-                  {tab.label}
+                    active === i ? 'text-blue-400 border-b-2 border-blue-500 bg-blue-500/5' : 'text-slate-500 hover:text-slate-300'
+                  }`}>
+                  {label}
                 </button>
               ))}
             </div>
 
-            {/* Screenshot real */}
             <div className="relative w-full">
               <Image
-                key={current.key}
-                src={current.img}
-                alt={`FlexDSP ${current.label} tab`}
+                key={active}
+                src={imgs[active]}
+                alt={`FlexDSP ${tx.tabs[active]}`}
                 width={1280}
                 height={760}
                 className="w-full h-auto block"
-                priority={active === 'vumetros'}
+                priority={active === 0}
               />
             </div>
           </div>

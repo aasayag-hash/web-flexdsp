@@ -1,8 +1,10 @@
 'use client'
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import { ParticleField } from '@/components/animations/ParticleField'
 import { Button } from '@/components/ui/Button'
+import { useLang } from '@/context/LanguageContext'
+import { t } from '@/i18n/translations'
 
 const stagger = {
   container: { animate: { transition: { staggerChildren: 0.1 } } },
@@ -13,85 +15,69 @@ const stagger = {
 }
 
 export function HeroSection() {
+  const { lang } = useLang()
+  const tx = t[lang].hero
+
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-16">
-      {/* Background layers */}
       <div className="absolute inset-0 grid-bg opacity-40" />
       <div className="absolute inset-0">
         <ParticleField className="opacity-60" />
       </div>
 
-      {/* Ambient glows */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute top-1/3 left-1/4 w-[400px] h-[300px] bg-cyan-500/8 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-1/3 right-1/4 w-[300px] h-[200px] bg-blue-800/10 rounded-full blur-[80px] pointer-events-none" />
 
-      {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full">
         <div className="text-center max-w-5xl mx-auto">
-          <motion.div
-            variants={stagger.container}
-            initial="initial"
-            animate="animate"
-          >
-            {/* Badge */}
+          <motion.div variants={stagger.container} initial="initial" animate="animate">
+
             <motion.div variants={stagger.item} className="flex justify-center mb-8">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/20 bg-blue-500/5 text-blue-400 text-xs font-medium tracking-wider uppercase">
                 <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
-                FlexDSP Audio v2.51 · Professional DSP
+                {tx.badge}
               </div>
             </motion.div>
 
-            {/* Headline */}
             <motion.h1
               variants={stagger.item}
               className="font-display font-bold tracking-tight leading-[0.9] text-white mb-6"
               style={{ fontSize: 'clamp(3rem, 8vw, 7rem)' }}
             >
-              Precision DSP
+              {tx.title1}
               <br />
               <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent text-glow-blue">
-                Processing
+                {tx.title2}
               </span>
               <br />
-              Without Limits
+              {tx.title3}
             </motion.h1>
 
-            {/* Subheadline */}
-            <motion.p
-              variants={stagger.item}
-              className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-10"
-            >
-              FlexDSP Audio is a complete DSP system for Linux embedded devices — unlimited input/output
-              channels, unlimited parametric EQ filters per channel, active crossovers, FIR convolution,
-              Dante/AES67, and a browser-based console accessible from any device on your network.
+            <motion.p variants={stagger.item}
+              className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-10">
+              {tx.desc}
             </motion.p>
 
-            {/* CTAs */}
-            <motion.div
-              variants={stagger.item}
-              className="flex flex-wrap items-center justify-center gap-4 mb-16"
-            >
+            <motion.div variants={stagger.item}
+              className="flex flex-wrap items-center justify-center gap-4 mb-16">
               <Button variant="primary" size="lg" href="#download">
                 <DownloadIcon />
-                Download Free
+                {tx.downloadFree}
               </Button>
               <Button variant="ghost" size="lg" href="#how-it-works">
-                Learn More
+                {tx.learnMore}
                 <ArrowIcon />
               </Button>
             </motion.div>
 
-            {/* Stats row */}
-            <motion.div
-              variants={stagger.item}
-              className="flex flex-wrap justify-center gap-8 mb-12 text-sm text-slate-500"
-            >
+            <motion.div variants={stagger.item}
+              className="flex flex-wrap justify-center gap-8 mb-12 text-sm text-slate-500">
               {[
-                { value: 'v2.51', label: 'Latest Version' },
-                { value: '64-bit', label: 'Precision' },
-                { value: '∞', label: 'Channels & EQ filters' },
-                { value: 'Dante', label: 'AES67 Support' },
+                { value: 'v2.51', label: tx.statVersion },
+                { value: '64-bit', label: tx.statPrecision },
+                { value: '∞', label: tx.statChannels },
+                { value: 'Dante', label: tx.statDante },
               ].map((s) => (
                 <div key={s.label} className="flex flex-col items-center gap-1">
                   <span className="text-2xl font-bold text-white font-display">{s.value}</span>
@@ -101,7 +87,6 @@ export function HeroSection() {
             </motion.div>
           </motion.div>
         </div>
-
       </div>
 
       {/* Scroll indicator */}
@@ -123,17 +108,8 @@ export function HeroSection() {
 }
 
 function DownloadIcon() {
-  return (
-    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-    </svg>
-  )
+  return <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
 }
-
 function ArrowIcon() {
-  return (
-    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-    </svg>
-  )
+  return <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
 }

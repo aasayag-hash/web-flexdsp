@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Space_Grotesk } from 'next/font/google'
+import { LanguageProvider } from '@/context/LanguageContext'
 import './globals.css'
 
 const inter = Inter({
@@ -46,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className="min-h-screen bg-[#080a0f] text-slate-100 noise-overlay">
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   )

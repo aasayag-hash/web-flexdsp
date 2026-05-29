@@ -1,84 +1,23 @@
 'use client'
 import { FadeIn } from '@/components/animations/FadeIn'
+import { useLang } from '@/context/LanguageContext'
+import { t } from '@/i18n/translations'
 
-const platforms = [
-  {
-    name: 'Linux x86_64',
-    logo: <LinuxLogo />,
-    backends: ['ALSA', 'PipeWire'],
-    desc: 'Full native support on any 64-bit Linux PC or server. Ideal for studio and home audio setups.',
-    arch: 'amd64',
-    status: 'stable',
-  },
-  {
-    name: 'Linux ARM64',
-    logo: <LinuxLogo />,
-    backends: ['ALSA', 'PipeWire'],
-    desc: 'Optimized for aarch64 SBCs — TV-Box (Armbian), Orange Pi, Rock Pi, and other ARM64 boards.',
-    arch: 'aarch64',
-    status: 'stable',
-  },
-  {
-    name: 'Raspberry Pi 3 · 4 · 5',
-    logo: <PiLogo />,
-    backends: ['ALSA', 'PipeWire'],
-    desc: 'Purpose-built binaries for armv7 (Pi 3) and arm64 (Pi 4/5). Perfect for always-on DSP appliances.',
-    arch: 'armv7 / arm64',
-    status: 'stable',
-  },
-]
+const logos = [<LinuxLogo key="linux1"/>, <LinuxLogo key="linux2"/>, <PiLogo key="pi"/>]
 
 const backends = [
   { name: 'ALSA', desc: 'Advanced Linux Sound Architecture', color: 'blue' },
-  { name: 'PipeWire', desc: 'Modern Linux audio server', color: 'cyan' },
-  { name: 'AES67', desc: 'AES67 / Ravenna IP audio', color: 'green' },
-  { name: 'DANTE', desc: 'Audinate DANTE audio network', color: 'blue' },
+  { name: 'AES67', desc: 'AES67 / Ravenna IP audio', color: 'cyan' },
+  { name: 'DANTE', desc: 'Audinate DANTE audio network', color: 'green' },
 ]
 
-const useCases = [
-  {
-    title: 'Studio Monitoring',
-    desc: 'Apply room correction and speaker linearization for accurate monitoring in untreated rooms.',
-    icon: '🎧',
-  },
-  {
-    title: 'Active Crossovers',
-    desc: 'Replace passive crossovers with precision digital filters for your multi-way speaker systems.',
-    icon: '🔊',
-  },
-  {
-    title: 'Room Correction',
-    desc: 'Load convolution IRs from measurement software like REW to correct room acoustics.',
-    icon: '🏠',
-  },
-  {
-    title: 'Audiophile Systems',
-    desc: 'Build reference-grade audio systems with DSP precision and audiophile-level transparency.',
-    icon: '💎',
-  },
-  {
-    title: 'Streaming Audio',
-    desc: 'Process audio streams in real-time for broadcast, live streaming, and podcast production.',
-    icon: '📡',
-  },
-  {
-    title: 'Multi-room Audio',
-    desc: 'Coordinate multi-room speaker systems with synchronized processing and routing.',
-    icon: '🏢',
-  },
-  {
-    title: 'Embedded Systems',
-    desc: 'Deploy compact DSP appliances on Raspberry Pi and ARM SBCs for always-on processing.',
-    icon: '🔧',
-  },
-  {
-    title: 'Pro DSP Research',
-    desc: 'Experiment with new filter topologies and signal processing algorithms in a flexible framework.',
-    icon: '🧪',
-  },
-]
+const useCaseIcons = ['🎧', '🔊', '🏠', '💎', '📡', '🏢', '🔧', '🧪']
 
 export function PlatformSection() {
+  const { lang } = useLang()
+  const txP = t[lang].platform
+  const txU = t[lang].useCases
+
   return (
     <>
       {/* Platform Support */}
@@ -88,37 +27,34 @@ export function PlatformSection() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <FadeIn className="text-center mb-20">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-slate-400 text-xs font-medium tracking-wider uppercase mb-6">
-              Compatibility
+              {txP.badge}
             </div>
             <h2 className="font-display font-bold text-4xl md:text-5xl text-white tracking-tight mb-4">
-              Runs everywhere
+              {txP.title1}
               <br />
               <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                you need it
+                {txP.title2}
               </span>
             </h2>
           </FadeIn>
 
           <div className="grid md:grid-cols-3 gap-6 mb-16">
-            {platforms.map((p, i) => (
+            {txP.platforms.map((p, i) => (
               <FadeIn key={p.name} delay={i * 0.1}>
                 <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6 hover:border-white/[0.10] hover:bg-white/[0.04] transition-all duration-300 group">
                   <div className="flex items-start justify-between mb-4">
                     <div className="w-12 h-12 text-slate-300 group-hover:text-white transition-colors">
-                      {p.logo}
+                      {logos[i]}
                     </div>
                     <span className="text-xs font-mono text-emerald-400 border border-emerald-500/20 bg-emerald-500/10 px-2 py-1 rounded-full">
-                      {p.status}
+                      {txP.stable}
                     </span>
                   </div>
                   <h3 className="font-display font-bold text-white text-xl mb-2">{p.name}</h3>
                   <p className="text-sm text-slate-500 mb-4">{p.desc}</p>
                   <div className="flex flex-wrap gap-2 mb-2">
-                    {p.backends.map(b => (
-                      <span key={b} className="text-xs font-mono text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2 py-1 rounded">
-                        {b}
-                      </span>
-                    ))}
+                    <span className="text-xs font-mono text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2 py-1 rounded">ALSA</span>
+                    <span className="text-xs font-mono text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-2 py-1 rounded">Dante/AES67</span>
                   </div>
                   <span className="text-xs font-mono text-slate-600">{p.arch}</span>
                 </div>
@@ -129,8 +65,8 @@ export function PlatformSection() {
           {/* Backends grid */}
           <FadeIn>
             <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-6">
-              <h3 className="text-sm font-semibold text-slate-300 mb-4 uppercase tracking-wider">Supported Audio Backends</h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+              <h3 className="text-sm font-semibold text-slate-300 mb-4 uppercase tracking-wider">{txP.backendTitle}</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {backends.map(b => (
                   <div key={b.name} className="text-center p-3 rounded-lg bg-white/[0.02] border border-white/[0.04] hover:border-white/[0.08] transition-colors">
                     <div className={`font-mono font-bold text-sm mb-1 ${
@@ -153,22 +89,22 @@ export function PlatformSection() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <FadeIn className="text-center mb-20">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-slate-400 text-xs font-medium tracking-wider uppercase mb-6">
-              Use Cases
+              {txU.badge}
             </div>
             <h2 className="font-display font-bold text-4xl md:text-5xl text-white tracking-tight mb-4">
-              Built for every
+              {txU.title1}
               <br />
               <span className="bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">
-                audio scenario
+                {txU.title2}
               </span>
             </h2>
           </FadeIn>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {useCases.map((u, i) => (
+            {txU.items.map((u, i) => (
               <FadeIn key={u.title} delay={i * 0.05}>
-                <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5 hover:border-white/[0.10] hover:bg-white/[0.04] transition-all duration-300 group h-full">
-                  <div className="text-2xl mb-3">{u.icon}</div>
+                <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-5 hover:border-white/[0.10] hover:bg-white/[0.04] transition-all duration-300 h-full">
+                  <div className="text-2xl mb-3">{useCaseIcons[i]}</div>
                   <h3 className="font-semibold text-white mb-2 text-sm">{u.title}</h3>
                   <p className="text-xs text-slate-500 leading-relaxed">{u.desc}</p>
                 </div>

@@ -130,7 +130,7 @@ export function PerformanceSection() {
             <h3 className="font-semibold text-white mb-6 text-center">Multi-threaded Pipeline Architecture</h3>
             <div className="flex flex-col md:flex-row items-center justify-center gap-4">
               {[
-                { label: 'Audio Backend', sublabel: 'ALSA / PipeWire / CoreAudio', color: 'blue' },
+                { label: 'Audio Backend', sublabel: 'ALSA / Dante AES67', color: 'blue' },
                 { label: 'Sample Buffer', sublabel: '64–4096 samples', color: 'slate' },
                 { label: 'DSP Thread Pool', sublabel: 'N × CPU cores', color: 'cyan' },
                 { label: 'Filter Stages', sublabel: 'FIR · IIR · Conv', color: 'green' },

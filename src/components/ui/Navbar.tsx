@@ -2,18 +2,22 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from './Button'
-
-const links = [
-  { label: 'Features', href: '#features' },
-  { label: 'How It Works', href: '#how-it-works' },
-  { label: 'DSP Engine', href: '#dsp-engine' },
-  { label: 'Performance', href: '#performance' },
-  { label: 'Use Cases', href: '#use-cases' },
-]
+import { useLang } from '@/context/LanguageContext'
+import { t } from '@/i18n/translations'
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const { lang, toggle } = useLang()
+  const tx = t[lang].nav
+
+  const links = [
+    { label: tx.features, href: '#features' },
+    { label: tx.howItWorks, href: '#how-it-works' },
+    { label: tx.dspEngine, href: '#dsp-engine' },
+    { label: tx.performance, href: '#performance' },
+    { label: tx.useCases, href: '#use-cases' },
+  ]
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -49,32 +53,32 @@ export function Navbar() {
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-1">
             {links.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                className="px-4 py-2 text-sm text-slate-400 hover:text-white transition-colors duration-200 rounded-lg hover:bg-white/5"
-              >
+              <a key={l.href} href={l.href}
+                className="px-4 py-2 text-sm text-slate-400 hover:text-white transition-colors duration-200 rounded-lg hover:bg-white/5">
                 {l.label}
               </a>
             ))}
           </nav>
 
-          {/* CTA */}
+          {/* CTA + lang toggle */}
           <div className="hidden md:flex items-center gap-3">
-            <Button variant="outline" size="sm" href="#how-it-works">
-              Learn More
-            </Button>
-            <Button variant="primary" size="sm" href="#download">
-              Download
-            </Button>
+            {/* Language selector */}
+            <button
+              onClick={toggle}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/10 text-xs font-mono font-bold text-slate-400 hover:text-white hover:border-white/20 transition-all duration-200"
+              aria-label="Toggle language"
+            >
+              <span className={lang === 'en' ? 'text-blue-400' : 'text-slate-500'}>EN</span>
+              <span className="text-slate-700">/</span>
+              <span className={lang === 'es' ? 'text-blue-400' : 'text-slate-500'}>ES</span>
+            </button>
+            <Button variant="outline" size="sm" href="#how-it-works">{tx.learnMore}</Button>
+            <Button variant="primary" size="sm" href="#download">{tx.download}</Button>
           </div>
 
           {/* Mobile menu button */}
-          <button
-            className="md:hidden p-2 text-slate-400 hover:text-white"
-            onClick={() => setOpen(!open)}
-            aria-label="Toggle menu"
-          >
+          <button className="md:hidden p-2 text-slate-400 hover:text-white"
+            onClick={() => setOpen(!open)} aria-label="Toggle menu">
             <div className="w-5 h-4 flex flex-col justify-between">
               <span className={`block h-px bg-current transition-all duration-300 ${open ? 'rotate-45 translate-y-2' : ''}`} />
               <span className={`block h-px bg-current transition-all duration-300 ${open ? 'opacity-0' : ''}`} />
@@ -96,22 +100,20 @@ export function Navbar() {
           >
             <div className="px-6 py-4 flex flex-col gap-1">
               {links.map((l) => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className="px-4 py-3 text-sm text-slate-400 hover:text-white transition-colors rounded-lg hover:bg-white/5"
-                >
+                <a key={l.href} href={l.href} onClick={() => setOpen(false)}
+                  className="px-4 py-3 text-sm text-slate-400 hover:text-white transition-colors rounded-lg hover:bg-white/5">
                   {l.label}
                 </a>
               ))}
-              <div className="flex gap-3 mt-4 pt-4 border-t border-white/[0.06]">
-                <Button variant="outline" size="sm" href="#how-it-works">
-                  Learn More
-                </Button>
-                <Button variant="primary" size="sm" href="#download">
-                  Download
-                </Button>
+              <div className="flex gap-3 mt-4 pt-4 border-t border-white/[0.06] items-center">
+                <button onClick={toggle}
+                  className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-white/10 text-xs font-mono font-bold text-slate-400 hover:text-white hover:border-white/20 transition-all">
+                  <span className={lang === 'en' ? 'text-blue-400' : 'text-slate-500'}>EN</span>
+                  <span className="text-slate-700">/</span>
+                  <span className={lang === 'es' ? 'text-blue-400' : 'text-slate-500'}>ES</span>
+                </button>
+                <Button variant="outline" size="sm" href="#how-it-works">{tx.learnMore}</Button>
+                <Button variant="primary" size="sm" href="#download">{tx.download}</Button>
               </div>
             </div>
           </motion.div>
